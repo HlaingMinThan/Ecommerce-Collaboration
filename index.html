@@ -4,12 +4,530 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Creative Coder- Learning Platform</title>
+    <title>Creative Coder- Ecormmerce Platform</title>
     <!-- import tailwind cdn -->
     <link
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
+
+    <!-- flickity cdn -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <style>
+      .flickity-viewport {
+        height: 500px !important;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <nav class="bg-black">
+      <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-16">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+            x-data
+          >
+            <!-- Mobile menu button-->
+            <button
+              @click="$dispatch('open-dropdown')"
+              type="button"
+              class="
+                inline-flex
+                items-center
+                justify-center
+                p-2
+                rounded-md
+                text-gray-400
+                hover:text-white
+                hover:bg-gray-700
+                focus:outline-none
+                focus:ring-2 focus:ring-inset focus:ring-white
+              "
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <!--
+              Icon when menu is closed.
+  
+              Heroicon name: outline/menu
+  
+              Menu open: "hidden", Menu closed: "block"
+            -->
+              <svg
+                class="block h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              <!--
+              Icon when menu is open.
+  
+              Heroicon name: outline/x
+  
+              Menu open: "block", Menu closed: "hidden"
+            -->
+              <svg
+                class="hidden h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="
+              flex-1 flex
+              items-center
+              justify-center
+              sm:items-stretch
+              sm:justify-start
+            "
+          >
+            <div class="flex-shrink-0 flex items-center">
+              <div
+                class="
+                  block
+                  lg:hidden
+                  h-8
+                  w-auto
+                  text-2xl text-indigo-500
+                  font-bold
+                "
+              >
+                Ecormmerce
+              </div>
+              <div
+                class="
+                  hidden
+                  lg:block
+                  h-8
+                  w-auto
+                  text-2xl text-indigo-500
+                  font-bold
+                "
+              >
+                Ecormmerce <span class="text-white ml-1">Platform</span>
+              </div>
+            </div>
+            <div class="hidden sm:block sm:ml-6">
+              <div class="flex space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a
+                  href="#"
+                  class="
+                    bg-gray-900
+                    text-white
+                    px-3
+                    py-2
+                    rounded-md
+                    text-sm
+                    font-medium
+                  "
+                  aria-current="page"
+                  >Home</a
+                >
+
+                <a
+                  href="#"
+                  class="
+                    text-gray-300
+                    hover:bg-gray-700
+                    hover:text-white
+                    px-3
+                    py-2
+                    rounded-md
+                    text-sm
+                    font-medium
+                  "
+                  >Products</a
+                >
+                <a
+                  href="#"
+                  class="
+                    text-gray-300
+                    hover:bg-gray-700
+                    hover:text-white
+                    px-3
+                    py-2
+                    rounded-md
+                    text-sm
+                    font-medium
+                  "
+                  >Contact</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="
+              absolute
+              inset-y-0
+              right-0
+              flex
+              items-center
+              pr-2
+              sm:static
+              sm:inset-auto
+              sm:ml-6
+              sm:pr-0
+            "
+          >
+            <button
+              class="
+                bg-gray-800
+                p-1
+                rounded-full
+                text-gray-400
+                hover:text-white
+                focus:outline-none
+                focus:ring-2
+                focus:ring-offset-2
+                focus:ring-offset-gray-800
+                focus:ring-white
+              "
+            >
+              <span class="sr-only">View notifications</span>
+              <!-- Heroicon name: outline/bell -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="fill-current text-white p-1"
+                id="Layer_1"
+                data-name="Layer 1"
+                viewBox="0 0 512 512"
+                width="30"
+                height="30"
+              >
+                <title>wheel-cart-outline</title>
+                <path
+                  class="cls-1"
+                  d="M499.94,86.36A57.22,57.22,0,0,0,454.37,64H89.95L76.42,9.71A12.79,12.79,0,0,0,64,0H12.8a12.8,12.8,0,1,0,0,25.6H54l97.71,392a51.19,51.19,0,1,0,77.07,56H347.22a51.2,51.2,0,1,0,0-25.6H228.78a51.29,51.29,0,0,0-49.58-38.4c-1,0-2.06,0-3.08.11L163.33,358.4H407.83a57.61,57.61,0,0,0,55.75-43.12l46.55-179.2A57.24,57.24,0,0,0,499.94,86.36ZM396.8,435.2a25.6,25.6,0,1,1-25.6,25.6A25.63,25.63,0,0,1,396.8,435.2Zm-192,25.6a25.6,25.6,0,1,1-25.6-25.6A25.63,25.63,0,0,1,204.8,460.8Zm234-152a32,32,0,0,1-31,24H157.34l-16-64H449.2Zm17-65.64H135l-16-64H472.48Zm29.49-113.56-6.22,24H112.68l-16-64H454.37a32,32,0,0,1,31,40Z"
+                />
+              </svg>
+            </button>
+
+            <!-- Profile dropdown -->
+            <div class="ml-3 relative" x-data="{show:false}">
+              <div>
+                <button
+                  type="button"
+                  class="
+                    bg-gray-800
+                    flex
+                    text-sm
+                    rounded-full
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-offset-gray-800
+                    focus:ring-white
+                  "
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  @click="show=!show"
+                >
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-10 w-10 rounded-full"
+                    src="./images/user.png"
+                    alt=""
+                  />
+                </button>
+              </div>
+
+              <!--
+              Dropdown menu, show/hide based on menu state.
+  
+              Entering: "transition ease-out duration-100"
+                From: "transform opacity-0 scale-95"
+                To: "transform opacity-100 scale-100"
+              Leaving: "transition ease-in duration-75"
+                From: "transform opacity-100 scale-100"
+                To: "transform opacity-0 scale-95"
+            -->
+              <div
+                x-show="show"
+                class="
+                  origin-top-right
+                  absolute
+                  right-0
+                  mt-2
+                  w-48
+                  rounded-md
+                  shadow-lg
+                  py-1
+                  bg-white
+                  ring-1 ring-black ring-opacity-5
+                  focus:outline-none
+                "
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabindex="-1"
+              >
+                <!-- Active: "bg-gray-100", Not Active: "" -->
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-0"
+                  >Your Profile</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-1"
+                  >Settings</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-2"
+                  >Sign out</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="sm:hidden" id="mobile-menu" x-data="{show:false}">
+        <div
+          class="px-2 pt-2 pb-3 space-y-1"
+          x-show="show"
+          @open-dropdown.window="show=!show"
+        >
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a
+            href="#"
+            class="
+              bg-gray-900
+              text-white
+              block
+              px-3
+              py-2
+              rounded-md
+              text-base
+              font-medium
+            "
+            aria-current="page"
+            >Home</a
+          >
+
+          <a
+            href="#"
+            class="
+              text-gray-300
+              hover:bg-gray-700
+              hover:text-white
+              block
+              px-3
+              py-2
+              rounded-md
+              text-base
+              font-medium
+            "
+            >Products</a
+          >
+          <a
+            href="#"
+            class="
+              text-gray-300
+              hover:bg-gray-700
+              hover:text-white
+              block
+              px-3
+              py-2
+              rounded-md
+              text-base
+              font-medium
+            "
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- slider -->
+    <slider
+      class="min-h-full bg-black text-white flex items-center justify-center"
+      x-data="carouselFilter()"
+    >
+      <div class="container grid grid-cols-1">
+        <h1 class="text-5xl text-center my-10 text-indigo-600 text-semibold">
+          Our Latest <span class="text-white ml-3">Products</span>
+        </h1>
+        <div
+          class="row-start-2 col-start-1"
+          x-show="active == 0"
+          x-transition:enter="transition ease-out duration-300"
+          x-transition:enter-start="opacity-0 transform scale-90"
+          x-transition:enter-end="opacity-100 transform scale-100"
+          x-transition:leave="transition ease-in duration-300"
+          x-transition:leave-start="opacity-100 transform scale-100"
+          x-transition:leave-end="opacity-0 transform scale-90"
+        >
+          <div
+            class="grid grid-cols-1 grid-rows-1"
+            x-data="carousel()"
+            x-init="init()"
+          >
+            <div
+              class="
+                col-start-1
+                row-start-1
+                relative
+                z-20
+                flex
+                items-center
+                justify-center
+                pointer-events-none
+                text-center
+              "
+            >
+              <h1
+                class="
+                  absolute
+                  text-5xl
+                  p-3
+                  uppercase
+                  font-black
+                  tracking-widest
+                "
+                x-show="active == 0"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-12"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-out duration-300"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-12"
+              >
+                Airpod Pro
+              </h1>
+              <h1
+                class="
+                  absolute
+                  text-5xl
+                  p-3
+                  uppercase
+                  font-black
+                  tracking-widest
+                "
+                x-show="active == 1"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-12"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-out duration-300"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-12"
+              >
+                M1 Macbook Air
+              </h1>
+              <h1
+                class="
+                  absolute
+                  text-5xl
+                  p-3
+                  uppercase
+                  font-black
+                  tracking-widest
+                "
+                x-show="active == 2"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-12"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-out duration-300"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-12"
+              >
+                New Beat Pro Headphone
+              </h1>
+              <h1
+                class="
+                  absolute
+                  text-5xl
+                  p-3
+                  uppercase
+                  font-black
+                  tracking-widest
+                "
+                x-show="active == 3"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-12"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-out duration-300"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-12"
+              >
+                iWatch Series 5
+              </h1>
+            </div>
+
+            <div class="carousel col-start-1 row-start-1" x-ref="carousel">
+              <div class="w-3/5 px-2">
+                <a href=""
+                  ><img src="./images/slider photos/airpod.jpg" loading="lazy"
+                /></a>
+              </div>
+              <div class="w-3/5 px-2">
+                <a href="">
+                  <img src="./images/slider photos/mac.jpg" loading="lazy" />
+                </a>
+              </div>
+              <div class="w-3/5 px-2">
+                <a href="">
+                  <img
+                    src="./images/slider photos/beat-pro.jpg"
+                    loading="lazy"
+                  />
+                </a>
+              </div>
+              <div class="w-3/5 px-2">
+                <a href="">
+                  <img src="./images/slider photos/iwatch.jpg" loading="lazy" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </slider>
+
+    <!-- flickity js -->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
 </html>
